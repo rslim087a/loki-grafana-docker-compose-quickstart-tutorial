@@ -4,4 +4,4 @@ This repo contains all the code needed to follow along with our **[YouTube Tutor
 
 ## New to DevOps?
 
-- Start here: [Kubernetes Training course](https://kubernetestraining.io/)
+Start here: [Kubernetes Training course](https://kubernetestraining.io/)
