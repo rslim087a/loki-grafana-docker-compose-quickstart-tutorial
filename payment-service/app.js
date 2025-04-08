@@ -3,42 +3,23 @@ const { v4: uuidv4 } = require('uuid');
 const pino = require('pino');
 const bodyParser = require('body-parser');
 const faker = require('faker');
-const axios = require('axios');
 const path = require('path');
 const fs = require('fs');
 
 // Environment variables
 const PORT = process.env.PORT || 3000;
 const SERVICE_NAME = process.env.SERVICE_NAME || 'payment-processor';
-const LOKI_URL = process.env.LOKI_URL || 'http://loki:3100/loki/api/v1/push';
 
-// Configure Pino logger for Loki
-const connectLogger = () => {
-  try {
-    // Check if URL is valid and contains protocol
-    const url = new URL(LOKI_URL);
-    
-    // Create a simple logger that outputs to console
-    return pino({
-      level: process.env.LOG_LEVEL || 'info',
-      base: {
-        service: SERVICE_NAME,
-        env: process.env.NODE_ENV || 'development'
-      },
-      timestamp: () => `,"timestamp":"${new Date().toISOString()}"`,
-    });
-  } catch (err) {
-    console.error(`Failed to connect to Loki: ${err.message}`);
-    // Fallback to console logging
-    return pino({
-      level: process.env.LOG_LEVEL || 'info',
-      base: {
-        service: SERVICE_NAME,
-        env: process.env.NODE_ENV || 'development'
-      }
-    });
-  }
-};
+// Configure Pino logger
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  base: {
+    service: SERVICE_NAME,
+    env: process.env.NODE_ENV || 'development'
+  },
+  timestamp: () => `,"timestamp":"${new Date().toISOString()}"`,
+});
+
 
 const logger = connectLogger();
 
