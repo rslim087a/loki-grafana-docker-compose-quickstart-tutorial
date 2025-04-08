@@ -9,7 +9,6 @@ services:
     environment:
       - PORT=3000
       - SERVICE_NAME=payment-processor
-      - LOKI_URL=http://loki:3100/loki/api/v1/push
       - NODE_ENV=production
       - LOG_LEVEL=info
     networks:
@@ -22,7 +21,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-
+  
   load-generator:
     build:
       context: ./load-generator
