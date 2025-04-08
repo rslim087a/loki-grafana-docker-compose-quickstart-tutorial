@@ -20,9 +20,6 @@ const logger = pino({
   timestamp: () => `,"timestamp":"${new Date().toISOString()}"`,
 });
 
-
-const logger = connectLogger();
-
 const app = express();
 
 // Middleware
