@@ -11,3 +11,6 @@ providers:
     allowUiUpdates: true
     options:
       path: /var/lib/grafana/dashboards
+    datasources:
+      - name: 'DS_LOKI'
+        uid: 'loki'
